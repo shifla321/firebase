@@ -1,9 +1,19 @@
+
+
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/settings/Appinfo.dart';
+import 'package:respiro_projectfltr/Login/welcome.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
+import 'package:respiro_projectfltr/settings/invite.dart';
+import 'package:respiro_projectfltr/settings/notification.dart';
+import 'package:respiro_projectfltr/settings/settings_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class setting extends StatefulWidget {
   const setting({super.key});
@@ -18,13 +28,18 @@ class _settingState extends State<setting> {
 
   @override
   Widget build(BuildContext context) {
-    // String id=auth.currentUser!.uid;
+     String id=auth.currentUser!.uid;
+      print(id);
     return  Scaffold(
       drawer: Drawer(
-        child: ListView(
+        child:StreamBuilder(stream: _firestore.collection('user firebase').doc(id).snapshots(), 
+        builder:((context, snapshot) {
+          DocumentSnapshot data=snapshot.data!;
+          return
+          ListView(
           children: [
-            const UserAccountsDrawerHeader(accountName: Text("SHIFLA"),
-             accountEmail: Text("shifla@gmail.com"),
+             UserAccountsDrawerHeader(accountName: Text("${data['name']}"),
+             accountEmail: Text("${data['email']}"),
              currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage("images/profile.png"),
               
@@ -34,27 +49,56 @@ class _settingState extends State<setting> {
              ),
              ListTile(leading: Icon(Icons.person_add_alt_outlined,size: 26,),
               title: Text("Invite Friends",style: TextStyle(fontSize: 22),),
-              onTap: (){},
+              onTap: (){
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => Invite_page()),
+);
+              },
              ),
               ListTile(leading: Icon(Icons.settings,size: 26,),
               title: Text("Setting",style: TextStyle(fontSize: 22),),
-              onTap: (){},
+              onTap: (){
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => Settings_page()),
+);
+              },
              ),
               ListTile(leading: Icon(Icons.info_outline,size: 26,),
               title: Text("App info",style: TextStyle(fontSize: 22),),
-              onTap: (){},
+              onTap: (){
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => Appinfo()),
+);
+              },
              ),
               ListTile(leading: Icon(Icons.notification_add,size: 26,),
               title: Text("Notification",style: TextStyle(fontSize: 22),),
-              onTap: (){},
+              onTap: (){
+                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => notification()),
+);
+              },
               
              ),
              Padding(
                padding: const EdgeInsets.only(top: 300),
-               child: TextButton(onPressed: (){}, child: Text("Log Out",style: TextStyle(fontSize: 22,color: Colors.black),)),
+               child: TextButton(onPressed: ()async{
+                     SharedPreferences preferences = await SharedPreferences.getInstance();
+                     auth.signOut().then((value) =>  Navigator.push(context, MaterialPageRoute(builder: ((context) => const login()))));
+                     preferences.clear();
+                     log('Loggout Succesfully' as num);
+                     
+               }, child: Text("Log Out",style: TextStyle(fontSize: 22,color: Colors.black),)),
              )
           ],
-        ),
+        );
+          
+        }) )
+        
       ),
           body: Column(
         children: [
@@ -64,7 +108,7 @@ class _settingState extends State<setting> {
               children: [
                 
             CustomPaint(
-              size: const Size(double.maxFinite,200),
+              size:  Size(double.maxFinite,200),
                 painter: RPSCustomPainter() ,
             ),
             

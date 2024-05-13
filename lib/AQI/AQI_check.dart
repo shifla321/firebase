@@ -403,36 +403,40 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
                           ],
                         ))
                   ])),
-              Container(
-                height: 55,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 142, 128, 128)
-                          .withOpacity(0.5),
-                      blurRadius: 5.0,
-                      spreadRadius: 2.0,
-                      offset: const Offset(0, 3),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 142, 128, 128)
+                            .withOpacity(0.5),
+                        blurRadius: 5.0,
+                        spreadRadius: 2.0,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  
+                  child: Expanded(
+                    child: Container(
+                      child: TabBar(
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicator: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: HexColor("F4BE6D")),
+                          tabs: [
+                            const Tab(
+                              text: "Hourly",
+                            ),
+                            const Tab(
+                              text: "Daily",
+                            ),
+                          ]),
                     ),
-                  ],
-                ),
-                child: Expanded(
-                  child: Container(
-                    child: TabBar(
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicator: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: HexColor("F4BE6D")),
-                        tabs: [
-                          const Tab(
-                            text: "Hourly",
-                          ),
-                          const Tab(
-                            text: "Daily",
-                          ),
-                        ]),
                   ),
                 ),
               ),
@@ -440,27 +444,27 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
                 height: 30,
               ),
                      Container(height: 400,
+                     
               child: TabBarView(children: [
                 Card(elevation: 2,
                   child: Container(
                     height: 20,
                     width: 60,
-                    
-                    child: Text(
-                      '13/feb 2024'
+                    color: Color.fromARGB(255, 234, 191, 105),
+                    child:Text('hg')
                     ),
+                    
                   ),
-                ),
+                
                   Card(
                   child: Container(
                     height: 20,
                     width: 60,
-                  
-                    child: Text(
-                      'bbbbbb'
-                    ),
+                   color: Color.fromARGB(255, 234, 191, 105),
+                    child:Text("khg")
+                    )
                   ),
-                ),
+                
               ]),
             )
          ]),

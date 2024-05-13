@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:respiro_projectfltr/aqi.dart';
+import 'package:respiro_projectfltr/AQI/aqi.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
-import 'package:respiro_projectfltr/settings.dart';
+import 'package:respiro_projectfltr/general.dart';
+import 'package:respiro_projectfltr/home2.dart';
+import 'package:respiro_projectfltr/settings/settings.dart';
 
 class home1 extends StatefulWidget {
   const home1({super.key});
@@ -37,25 +39,33 @@ class _demoState extends State<home1> {
               right: 1,
               child: Padding(
                 padding: const EdgeInsets.only(left: 50,right: 50,top: 100),
-                child: Container(
-                  
-                  height: 159,
-                  width: 360,
-                  decoration: BoxDecoration(
-                    color: HexColor("FCD594"),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => home2()),
+);
+                  },
+                  child: Container(
                     
-                    
-                    
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20,top: 33),
-                    child: Text("Chech Air Quality",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B"),shadows: [
-                      Shadow(
-                        offset: Offset(5, 5),
-                        blurRadius: 7,
-                        color: Colors.black
-                      )
-                    ] ),),
+                    height: 159,
+                    width: 360,
+                    decoration: BoxDecoration(
+                      color: HexColor("FCD594"),
+                      
+                      
+                      
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20,top: 33),
+                      child: Text("Chech Air Quality",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B"),shadows: [
+                        Shadow(
+                          offset: Offset(5, 5),
+                          blurRadius: 7,
+                          color: Colors.black
+                        )
+                      ] ),),
+                    ),
                   ),
                 ),
               ),
@@ -124,8 +134,13 @@ class _demoState extends State<home1> {
                   color: HexColor("F4EAB6"),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                  child: Center(child: Text("General",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),))
+                  child: Center(child: TextButton(onPressed: (){
+                  Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=> General_page())
 
+              );
+                 }, child: Text("General",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),)))
               )
             ],
            ),

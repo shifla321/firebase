@@ -16,7 +16,7 @@ class Advices extends StatefulWidget {
   State<Advices> createState() => _AdvicesState();
 }
 
-class _AdvicesState extends State<Advices> {
+class _AdvicesState extends State<Advices> {   
   @override
   Widget build(BuildContext context) {
     final List _advicelist = [

@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/AQI/AQIscale.dart';
+import 'package:respiro_projectfltr/AQI/graph.dart';
+
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
+import 'package:respiro_projectfltr/AQI/pollutedcities.dart';
 
 class Aqipage extends StatefulWidget {
   const Aqipage({super.key});
@@ -50,7 +54,8 @@ class _AqipageState extends State<Aqipage> {
 
                 ),
               ),
-            )),
+            )
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 200,left: 199),
               child: Container(
@@ -104,7 +109,12 @@ class _AqipageState extends State<Aqipage> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 15),
-                            child: ElevatedButton(onPressed: (){}
+                            child: ElevatedButton(onPressed: (){
+                              Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => PollutedCities()),
+);
+                            }
                             , child: const 
                             Text("Polluted Cities",style: TextStyle(color: Colors.brown,fontWeight: FontWeight.bold,fontSize: 22),),
                             style: ButtonStyle(
@@ -157,7 +167,12 @@ class _AqipageState extends State<Aqipage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 15),
-                              child: ElevatedButton(onPressed: (){}
+                              child: ElevatedButton(onPressed: (){
+                                Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => graph()),
+);
+                              }
                               , child: const 
                               Text("Polluted Cities",style: TextStyle(color: Colors.brown,fontWeight: FontWeight.bold,fontSize: 22),),
                               style: ButtonStyle(
@@ -213,7 +228,12 @@ class _AqipageState extends State<Aqipage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 15),
-                              child: ElevatedButton(onPressed: (){}
+                              child: ElevatedButton(onPressed: (){
+                                Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => AQIscale()),
+);
+                              }
                               , child: const 
                               Text("AQI Scale",style: TextStyle(color: Colors.brown,fontWeight: FontWeight.bold,fontSize: 22),),
                               style: ButtonStyle(

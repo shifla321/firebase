@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:respiro_projectfltr/Login/signin.dart';
 import 'package:respiro_projectfltr/Login/signup_ph.dart';
 import 'package:respiro_projectfltr/home1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class login extends StatefulWidget {
   const login({super.key});
@@ -18,11 +19,13 @@ class _loginState extends State<login> {
   bool _obscureText = true;
   login()async
 {
+  SharedPreferences preferances= await SharedPreferences.getInstance();
   try {
   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: email,
     password: password,
  );
+ preferances.setString('isLoggin', credential.user!.uid);
  ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Sign in succesfull')));
         Navigator.pushReplacement(
@@ -102,7 +105,10 @@ height: 30,
             ),
             
             onPressed: (){
-              
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=> signup_ph())
+              );
             }, child: Text("Sign Up",style:TextStyle(fontSize: 24,color: Colors.black)))
              //, child: Text("Sign Up",style:TextStyle(fontSize: 24,color: Colors.black))),
           

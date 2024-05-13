@@ -20,10 +20,10 @@ class _graphState extends State<graph> {
           Stack(
                 children: [
                  CustomPaint(
-              size: Size(double.maxFinite,200),
+              size: const Size(double.maxFinite,200),
                 painter: RPSCustomPainter() ,
             ),
-            CustomRound(),
+            const CustomRound(),
             Padding(
               padding: const EdgeInsets.only(top: 90,left: 37),
               child: Container(
@@ -47,33 +47,13 @@ class _graphState extends State<graph> {
               ),
               
               
-            ),
-          
-                ],
-              ),
-               Padding(
-              padding: const EdgeInsets.only(top: 90,left: 3),
-              child: Container(
-                height: 70,
-                width: 290,
-                child: Column(children: [
-                 
-                 CircleAvatar(
-                  backgroundImage: AssetImage("images\image.pngimages\image.png"),
-                 )
-        ]
-    ),
-     decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: HexColor("F4EAB6"),
-                  
-
-                ),
-              )
-               )
+   
+ )
+                ]
+          )
         ]
  )
-
+ 
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/AQI/AQI_check.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
 
@@ -103,7 +104,12 @@ class _dailyState extends State<daily> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              IconButton(onPressed: (){}, icon: Icon(Icons.add_circle_outline),iconSize: 40,),
+                              IconButton(onPressed: (){
+                                  Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => Aqicheck_page()),
+);
+                              }, icon: Icon(Icons.add_circle_outline),iconSize: 40,),
                               Text('SET HOME',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),)
                             ],
                           )),
