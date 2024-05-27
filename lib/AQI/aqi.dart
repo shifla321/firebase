@@ -103,7 +103,7 @@ class _AqipageState extends State<Aqipage> {
                               height: 75,
                               width: 75,
                               color: Colors.black12,
-                              child: Image.asset("images/res.jpg"),
+                              child: Image.asset("assets/images/res.jpg"),
                               
                             ),
                           ),
@@ -161,7 +161,7 @@ class _AqipageState extends State<Aqipage> {
                                 height: 75,
                                 width: 75,
                                 color: Colors.black12,
-                                child: Image.asset("images/res.jpg"),
+                                child: Image.asset("assets/images/res.jpg"),
                                 
                               ),
                             ),
@@ -221,7 +221,7 @@ class _AqipageState extends State<Aqipage> {
                                 height: 75,
                                 width: 75,
                                 color: Colors.black12,
-                                child: Image.asset("images/res.jpg"),
+                                child: Image.asset("assets/images/res.jpg"),
                                 
                               ),
               

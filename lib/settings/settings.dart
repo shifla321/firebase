@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/AQI/aqi.dart';
+import 'package:respiro_projectfltr/general.dart';
 import 'package:respiro_projectfltr/settings/Appinfo.dart';
 import 'package:respiro_projectfltr/Login/welcome.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
@@ -171,7 +173,17 @@ class _settingState extends State<setting> {
                   color: HexColor("F4EAB6"),
                   borderRadius: BorderRadius.circular(15), 
                 ),
-                child: Center(child: Text("AQI",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),))
+                child: Center(
+                  
+                child: GestureDetector(
+                  onTap: () {
+                     Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=> Aqipage())
+
+              );
+                  },
+                  child: Text("AQI",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),)))
               ),
               const SizedBox(
                 width: 9,
@@ -184,7 +196,15 @@ class _settingState extends State<setting> {
                   color: HexColor("F4EAB6"),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                  child: Center(child: Text("General",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),))
+                  child: Center(child: GestureDetector(
+                    onTap: () {
+                        Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context)=> General_page())
+
+              );
+                    },
+                    child: Text("General",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 32,color: HexColor("D2891B")),)))
 
               )
             ],

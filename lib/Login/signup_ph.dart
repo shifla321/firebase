@@ -65,6 +65,7 @@ class _signup_phState extends State<signup_ph> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

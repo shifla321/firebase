@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:respiro_projectfltr/Login/otp.dart';
@@ -11,8 +12,29 @@ class forgot extends StatefulWidget {
 }
 
 class _forgotState extends State<forgot> {
-   final PhoneNumberController = TextEditingController();
+   final emailController= TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+
+  Future<void> resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Password reset email has been sent')),
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No user found for that email')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.message}')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +79,7 @@ class _forgotState extends State<forgot> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10)
                   ),
-                  hintText: "Phone_no",
+                  hintText: "Email",
                   
                   ),),
                 ),
@@ -70,9 +92,7 @@ class _forgotState extends State<forgot> {
                     width: 150,
                     child: ElevatedButton(onPressed: (){
                       if (_formKey.currentState!.validate()) {
-                         Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context)=> otp()));
+                       resetPassword();
                       }
                      
                     }

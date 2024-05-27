@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:respiro_projectfltr/Advices/Advices.dart';
 import 'package:respiro_projectfltr/Diseases/Diseases.dart';
-import 'package:respiro_projectfltr/AQI/aqi.dart';
+
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/daily.dart';
 import 'package:respiro_projectfltr/frame.dart';
 import 'package:respiro_projectfltr/news.dart';
 
-import 'package:respiro_projectfltr/settings/settings.dart';
+
 
 class General_page extends StatefulWidget {
   const General_page({super.key});

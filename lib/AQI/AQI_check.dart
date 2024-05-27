@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/bar%20grapg/mygraph.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 class Aqicheck_page extends StatefulWidget {
   const Aqicheck_page({super.key});
@@ -11,8 +17,24 @@ class Aqicheck_page extends StatefulWidget {
   @override
   State<Aqicheck_page> createState() => _Aqicheck_pageState();
 }
-
+List<double> airquality = [
+  23.5,
+  100.2,
+  51.5,
+  2.2,
+  45.1,
+  54.2,
+];
 class _Aqicheck_pageState extends State<Aqicheck_page> {
+
+   @override
+  void initState() {
+    super.initState();
+    _handleLocationPermission();
+    latlog();
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -451,7 +473,9 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
                     height: 20,
                     width: 60,
                     color: Color.fromARGB(255, 234, 191, 105),
-                    child:Text('hg')
+                    child: SizedBox(child: BarChartExample(
+                      airquality: airquality,
+                    )),
                     ),
                     
                   ),
@@ -465,10 +489,49 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
                     )
                   ),
                 
-              ]),
-            )
-         ]),
-          )),
+              ]
+              ),
+            ),
+
+            TextButton(onPressed: ()async{
+             await latlog();
+            }, child: Text('lat log'))
+         ]
+         ),
+          )
+          ),
     );
+  }
+  Future<bool> _handleLocationPermission() async {
+  bool serviceEnabled;
+  LocationPermission permission;
+  
+  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Location services are disabled. Please enable the services')));
+    return false;
+  }
+  permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {   
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Location permissions are denied')));
+      return false;
+    }
+  }
+  if (permission == LocationPermission.deniedForever) {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Location permissions are permanently denied, we cannot request permissions.')));
+    return false;
+  }
+  return true;
+}  
+
+ Future latlog()async{
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    log('user lat ${position.latitude} log ${position.longitude}  ===========================');
   }
 }
