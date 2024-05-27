@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:respiro_projectfltr/apiresponse/response_weather.dart';
 import 'package:respiro_projectfltr/bar%20grapg/mygraph.dart';
 import 'package:respiro_projectfltr/custom_round.dart';
 import 'package:respiro_projectfltr/frame.dart';
@@ -33,15 +34,33 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
     _handleLocationPermission();
     latlog();
   }
-  
+
+  String? lat;
+
+  String? lon;
+   Future latlog()async{
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+     double  lat = position.latitude;
+     double  log = position.longitude;
+
+
+    // log('user lat ${position.latitude} log ${position.longitude}  ===========================');
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          body: SingleChildScrollView(
-            child: Column(children: [
+          body: FutureBuilder(
+            future: GetWeather().fetchweather(lat, lon), builder: (context, snapshot) {
+              // final data = snapshot.data;
+
+              log('response boy  ${snapshot.data}');
+            return  SingleChildScrollView(
+            child: Column(
+              children: [
               Stack(
                 children: [
                   CustomPaint(
@@ -498,8 +517,8 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
             }, child: Text('lat log'))
          ]
          ),
-          )
-          ),
+          );
+          },) ),
     );
   }
   Future<bool> _handleLocationPermission() async {
@@ -529,9 +548,5 @@ class _Aqicheck_pageState extends State<Aqicheck_page> {
   return true;
 }  
 
- Future latlog()async{
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
-    log('user lat ${position.latitude} log ${position.longitude}  ===========================');
-  }
 }

@@ -30,6 +30,8 @@ class wether {
   wether.fromJsone(Map<String,dynamic> json){
     cityname = json['location']['name'];
     lat = json['location']['lat'];
+    lon = json['location']['lon'];
+    
   }
 
 }
